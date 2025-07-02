@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agenticbot"
+version = "0.1.0"
+description = "A ChatGPT-like clone built with Google ADK and Firecrawl"
+authors = [{name = "AgenticBot Team", email = "team@agenticbot.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "google-adk>=0.1.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "firecrawl-py>=0.2.0",
+    "ipykernel>=6.25.0",
+    "langchain-community>=0.2.0",
+    "litellm>=1.40.0",
+    "markitdown[all]>=0.0.1",
+    "openai>=1.30.0",
+    "google-generativeai>=0.7.0",
+    "typing-extensions>=4.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/agenticbot"
+Documentation = "https://github.com/yourusername/agenticbot/blob/main/README.md"
+Repository = "https://github.com/yourusername/agenticbot.git"
+Issues = "https://github.com/yourusername/agenticbot/issues"
+
+[tool.setuptools.packages.find]
+where = ["app"]
+include = ["chatgpt_agentic_clone*"]
+
+[tool.setuptools.package-dir]
+"" = "app" 
