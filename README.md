@@ -1,6 +1,6 @@
 # 🤖 AgenticBot - ChatGPT Clone with Google ADK
 
-AgentitBot is A powerful multi-agent AI assistant built with Google's Agent Development Kit (ADK) and Firecrawl, featuring web search, content extraction, deep research, and image generation capabilities.
+AgenticBot is a powerful multi-agent AI assistant built with Google's Agent Development Kit (ADK) and Firecrawl, featuring web search, content extraction, deep research, and image generation capabilities.
 
 ## ✨ Features
 
@@ -297,4 +297,3 @@ If you encounter any issues or have questions:
 ---
 
 **Happy coding! 🚀** # AgenticBot
-# AgenticBot
