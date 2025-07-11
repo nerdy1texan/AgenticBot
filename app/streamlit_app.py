@@ -11,7 +11,9 @@ from datetime import datetime
 from history_manager import HistoryManager
 
 # --- Setup ---
-load_dotenv()
+# Load environment variables from .env file (check current dir and parent dir)
+load_dotenv()  # Current directory
+load_dotenv('../.env')  # Parent directory
 setup_gemini()
 model = genai.GenerativeModel('gemini-2.0-flash-exp')
 

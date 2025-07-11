@@ -13,16 +13,23 @@ from google.adk import Agent
 # Load environment variables from .env file if it exists
 def load_env_file():
     """Load environment variables from .env file."""
-    if os.path.exists('.env'):
-        try:
-            with open('.env', 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if line and not line.startswith('#') and '=' in line:
-                        key, value = line.split('=', 1)
-                        os.environ[key.strip()] = value.strip()
-        except Exception:
-            pass  # Silently ignore errors
+    # Check current directory first, then parent directory
+    env_paths = ['.env', '../.env']
+    
+    for env_path in env_paths:
+        if os.path.exists(env_path):
+            try:
+                with open(env_path, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line and not line.startswith('#') and '=' in line:
+                            key, value = line.split('=', 1)
+                            # Remove quotes if present
+                            value = value.strip().strip("'\"")
+                            os.environ[key.strip()] = value
+                break  # Stop after finding the first .env file
+            except Exception:
+                pass  # Silently ignore errors
 
 # Load .env file when module is imported
 load_env_file()
