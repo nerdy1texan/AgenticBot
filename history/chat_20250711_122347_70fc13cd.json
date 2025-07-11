@@ -1,0 +1,82 @@
+{
+  "session_id": "70fc13cd",
+  "created_at": "2025-07-11 12:23:24",
+  "title": "what is the weather in Atlanta today?",
+  "chat_history": [
+    {
+      "role": "user",
+      "content": "what is the weather in Atlanta today? ",
+      "timestamp": "2025-07-11 12:23:45"
+    },
+    {
+      "role": "assistant",
+      "content": "Current information for '<b>what is the weather in Atlanta today? </b>':<br><br>1. <b>Hourly Weather Forecast for Atlanta, GA</b><br>🔗 <a href='https://weather.com/weather/hourbyhour/l/Atlanta+GA?canonicalCityId=5e31d30099c21fa9f77280443980bc98' target='_blank'>https://weather.com/weather/hourbyhour/l/Atlanta+GA?canonicalCityId=5e31d30099c21fa9f77280443980bc98</a><br>Hourly Weather-Atlanta, GA · 1 pm. 86°. 23%. Partly Cloudy. Feels Like93° · 2 pm. 87°. 39%. Scattered Thunderstorms. Feels Like93° · 3 pm. 87°. 36%. S...<br><br>2. <b>Weather Forecast and Conditions for Atlanta, GA</b><br>🔗 <a href='https://weather.com/weather/today/l/Atlanta+GA?canonicalCityId=5e31d30099c21fa9f77280443980bc98' target='_blank'>https://weather.com/weather/today/l/Atlanta+GA?canonicalCityId=5e31d30099c21fa9f77280443980bc98</a><br>Rain. Rain ending around 8:15 AM. Storms possible later. Now8:35 am9:05 am9:35 am10:05 am10:35 am11:05 am11:35 am12:05 pm12:35 pm1:05 pm1:35 pm2:05 pm...<br><br>3. <b>Atlanta, GA Weather Forecast - AccuWeather</b><br>🔗 <a href='https://www.accuweather.com/en/us/atlanta/30303/weather-forecast/348181' target='_blank'>https://www.accuweather.com/en/us/atlanta/30303/weather-forecast/348181</a><br>Today's Weather. Fri, Jul 11. Humid with clouds and sun; a shower in spots late this morning followed by a thunderstorm in parts of the area this afte...<br><br>",
+      "image_data": null,
+      "timestamp": "2025-07-11 12:23:47"
+    }
+  ],
+  "agentic_logs": [
+    {
+      "timestamp": "[12:23:45] ",
+      "type": "agent_step",
+      "message": "🤖 Root Agent received query: 'what is the weather in Atlanta today? '",
+      "full_message": "[12:23:45] 🤖 Root Agent received query: 'what is the weather in Atlanta today? '"
+    },
+    {
+      "timestamp": "[12:23:45] ",
+      "type": "agent_step",
+      "message": "🔍 Analyzing query intent and selecting appropriate agent...",
+      "full_message": "[12:23:45] 🔍 Analyzing query intent and selecting appropriate agent..."
+    },
+    {
+      "timestamp": "[12:23:45] ",
+      "type": "agent_step",
+      "message": "🎯 Detected current info request, delegating to Search Agent",
+      "full_message": "[12:23:45] 🎯 Detected current info request, delegating to Search Agent"
+    },
+    {
+      "timestamp": "[12:23:45] ",
+      "type": "tool_execution",
+      "message": "🔧 Search Agent preparing real-time information search...",
+      "full_message": "[12:23:45] 🔧 Search Agent preparing real-time information search..."
+    },
+    {
+      "timestamp": "[12:23:45] ",
+      "type": "api_call",
+      "message": "🌐 Executing Firecrawl web search for current information...",
+      "full_message": "[12:23:45] 🌐 Executing Firecrawl web search for current information..."
+    },
+    {
+      "timestamp": "[12:23:47] ",
+      "type": "result_processed",
+      "message": "✅ Current info search completed - found 10 results",
+      "full_message": "[12:23:47] ✅ Current info search completed - found 10 results"
+    },
+    {
+      "timestamp": "[12:23:47] ",
+      "type": "agent_step",
+      "message": "📝 Search Agent filtering most relevant current information...",
+      "full_message": "[12:23:47] 📝 Search Agent filtering most relevant current information..."
+    },
+    {
+      "timestamp": "[12:23:47] ",
+      "type": "agent_step",
+      "message": "🎉 Root Agent received current information from Search Agent",
+      "full_message": "[12:23:47] 🎉 Root Agent received current information from Search Agent"
+    },
+    {
+      "timestamp": "[12:23:47] ",
+      "type": "agent_step",
+      "message": "🏁 Task completed - response ready for user",
+      "full_message": "[12:23:47] 🏁 Task completed - response ready for user"
+    }
+  ],
+  "updated_at": "2025-07-11 12:23:47",
+  "metadata": {
+    "total_messages": 2,
+    "tools_used": [
+      "web_search"
+    ],
+    "session_duration": "00:00:00"
+  }
+}

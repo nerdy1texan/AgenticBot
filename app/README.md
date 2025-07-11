@@ -1,164 +1,223 @@
-# AgenticBot App
+# AgenticBot Application
 
-This directory contains the main application files for the AgenticBot project, including the Streamlit web interface, agent implementation, and comprehensive test suite.
+This directory contains the core AgenticBot application with both CLI and web interfaces.
 
 ## 📁 Directory Structure
 
 ```
 app/
-├── streamlit_app.py          # Main Streamlit web application
-├── main.py                   # Command-line interface and core logic
-├── requirements.txt          # Python dependencies for the app
+├── main.py                     # CLI application entry point
+├── streamlit_app.py           # Streamlit web interface with history
+├── history_manager.py         # Chat history persistence manager
+├── requirements.txt           # Python dependencies
+├── .env.template             # Environment variables template
 ├── README.md                 # This file
-├── chatgpt_agentic_clone/    # Agent implementation
-│   ├── __init__.py
-│   └── agent.py              # Core agent logic and tools
-└── tests/                    # Comprehensive test suite
-    ├── working_chat.py       # Working chat implementation
-    ├── enhanced_chat.py      # Enhanced chat functionality
-    ├── test_simple_chat.py   # Basic chat testing
-    ├── test_with_tools.py    # Tool integration testing
-    ├── test_agent_signature.py # Agent signature validation
-    ├── test_agent_run_async.py # Async agent execution
-    ├── test_direct_agent.py  # Direct agent interaction
-    ├── test_alternative_api.py # Alternative API approaches
-    ├── test_session_events.py # Session event handling
-    ├── test_different_method.py # Different testing methods
-    ├── test_direct_message.py # Direct message testing
-    ├── test_message_receipt.py # Message receipt validation
-    ├── test_explicit_agent.py # Explicit agent configuration
-    ├── test_tools.py         # Tool functionality testing
-    ├── test_object_attributes.py # Object attribute testing
-    ├── test_content_object.py # Content object validation
-    ├── test_runner_api.py    # Runner API testing
-    ├── test_model_and_format.py # Model and format testing
-    ├── test_message.py       # Message handling testing
-    ├── test_specific_response.py # Specific response testing
-    ├── test_final_approach.py # Final approach validation
-    └── test_alternative_approach.py # Alternative approach testing
+├── history/                  # Chat session storage directory
+│   ├── README.md            # History system documentation
+│   └── .gitkeep             # Git tracking for empty directory
+├── tests/                    # Test files directory
+│   ├── test_direct_agent.py # Direct agent testing
+│   ├── test_explicit_agent.py # Explicit agent testing
+│   └── [other test files]   # Various testing approaches
+└── chatgpt_agentic_clone/
+    ├── __init__.py          # Package initialization
+    └── agent.py             # Multi-agent system implementation
 ```
 
-## 🚀 Quick Start
+## 🚀 Features
 
-### Prerequisites
-- Python 3.8+
-- Conda environment activated (see main README.md for setup)
-- Required packages installed (see requirements.txt)
+### Core Capabilities
+- **🤖 Multi-Agent System**: Coordinated specialized agents
+- **🌐 Web Search**: Real-time information retrieval
+- **📄 Web Scraping**: Content extraction from URLs
+- **🔍 Deep Research**: Multi-source research synthesis
+- **🎨 Image Generation**: AI-powered image creation
+- **💬 Interactive Interfaces**: CLI and web-based chat
 
-### Running the Streamlit App
+### New History Features ✨
+- **📚 Persistent Chat History**: Automatic session saving with JSON storage
+- **🔍 Smart Search**: Find past conversations by title or content
+- **🆕 Session Management**: Easy new chat creation and switching
+- **📊 Session Analytics**: Message counts, tools used, and duration tracking
+- **🗑️ History Management**: Delete unwanted sessions
+- **📥 Export Capabilities**: Save sessions in multiple formats
+- **🔄 Session Restoration**: Complete context recovery with agentic logs
 
-1. **Navigate to the app directory:**
-   ```bash
-   cd app
-   ```
+## 🎯 Usage
 
-2. **Run the Streamlit application:**
-   ```bash
-   streamlit run streamlit_app.py
-   ```
+### Streamlit Web Interface
 
-3. **Access the web interface:**
-   - Local URL: http://localhost:8501
-   - Network URL: http://192.168.1.67:8501 (or your local IP)
+Start the web application:
+```bash
+streamlit run streamlit_app.py
+```
 
-### Running the Command-Line Interface
+#### History Features:
+- **New Chat Button**: Start fresh conversations while preserving current session
+- **History Sidebar**: Browse, search, and manage past conversations
+- **Auto-Save**: Sessions automatically saved after each interaction
+- **Session Info**: Current session title and start time displayed
+- **Search History**: Find specific conversations by keywords
+- **Delete Sessions**: Remove unwanted chat history
+- **Load Sessions**: Restore complete conversation context
 
+#### Special Commands:
+- `search for [query]` - Web search
+- `scrape [url]` - Extract webpage content
+- `research [topic]` - Deep multi-source research
+- `generate image [description]` - Create AI images
+
+### CLI Interface
+
+Start the command-line version:
 ```bash
 python main.py
 ```
 
-## 🔧 Key Files
+## 🔧 History System
 
-### `streamlit_app.py`
-- **Purpose:** Main web interface for the AgenticBot
-- **Features:** 
-  - User-friendly chat interface
-  - File upload capabilities
-  - Real-time agent responses
-  - Session management
+### Automatic Features
+- **Auto-Save**: Every conversation automatically saved to `history/` directory
+- **Smart Titles**: Auto-generated from first user message
+- **Timestamping**: All messages include creation timestamps
+- **Tool Tracking**: Logs which agents/tools were used in each session
+- **Metadata**: Session duration, message counts, and usage statistics
 
-### `main.py`
-- **Purpose:** Command-line interface and core application logic
-- **Features:**
-  - Direct agent interaction
-  - Tool execution
-  - Error handling
-  - Configuration management
+### File Structure
+Sessions saved as JSON files with format: `chat_YYYYMMDD_HHMMSS_[session_id].json`
 
-### `chatgpt_agentic_clone/agent.py`
-- **Purpose:** Core agent implementation
-- **Features:**
-  - Google ADK integration
-  - Multi-tool support (web search, scraping, research, image generation)
-  - Session management
-  - Error handling and fallbacks
+### Search Capabilities
+- Search by conversation title
+- Search within message content
+- Filter by date ranges
+- Browse by tools used
 
-### `requirements.txt`
-- **Purpose:** Python dependencies for the app
-- **Key packages:**
-  - streamlit
-  - google-adk
-  - firecrawl-py
-  - google-generativeai
-  - python-dotenv
+## 📊 Session Data Format
+
+Each saved session includes:
+```json
+{
+  "session_id": "unique_identifier",
+  "created_at": "2025-01-XX XX:XX:XX",
+  "updated_at": "2025-01-XX XX:XX:XX",
+  "title": "Auto-generated or custom title",
+  "chat_history": [
+    {
+      "role": "user|assistant",
+      "content": "message content",
+      "timestamp": "YYYY-MM-DD HH:MM:SS",
+      "image_data": "base64_if_present"
+    }
+  ],
+  "agentic_logs": [
+    {
+      "timestamp": "[HH:MM:SS]",
+      "type": "agent_step|tool_execution|api_call|result_processed",
+      "message": "detailed log entry"
+    }
+  ],
+  "metadata": {
+    "total_messages": 10,
+    "tools_used": ["web_search", "image_generation"],
+    "session_duration": "00:15:30"
+  }
+}
+```
+
+## 🛠️ Configuration
+
+### Environment Variables
+Create `.env` file from template:
+```bash
+cp .env.template .env
+```
+
+Required variables:
+- `GOOGLE_API_KEY`: Google AI API key
+- `FIRECRAWL_API_KEY`: Firecrawl service API key
+
+### History Settings
+The history system is automatically configured with:
+- **Storage Location**: `history/` directory
+- **Auto-Save**: Enabled by default
+- **Max Sessions**: 50 (older sessions auto-deleted)
+- **Search Indexing**: Title and content indexed
+- **Export Formats**: JSON and TXT supported
+
+## 🔒 Privacy & Security
+
+### Data Handling
+- **Local Storage**: All chat history stored locally in `history/` directory
+- **No Cloud Sync**: Sessions remain on your machine unless exported
+- **Encryption**: Consider encrypting the `history/` directory for sensitive data
+- **API Keys**: Stored securely in `.env` file (excluded from version control)
+
+### Cleanup Options
+- **Manual Delete**: Remove individual sessions via web interface
+- **Auto-Cleanup**: Automatic removal of sessions beyond limit (50 by default)
+- **Export Before Delete**: Save important conversations before cleanup
 
 ## 🧪 Testing
 
-The `tests/` directory contains a comprehensive test suite for validating different aspects of the agent:
-
-- **Basic functionality:** `test_simple_chat.py`, `working_chat.py`
-- **Tool integration:** `test_with_tools.py`, `test_tools.py`
-- **API interactions:** `test_runner_api.py`, `test_alternative_api.py`
-- **Message handling:** `test_message.py`, `test_message_receipt.py`
-- **Session management:** `test_session_events.py`
-- **Agent configuration:** `test_agent_signature.py`, `test_explicit_agent.py`
-
-### Running Tests
+Run the test suite:
 ```bash
-# Run a specific test
-python tests/working_chat.py
-
-# Run all tests (if you have pytest installed)
-pytest tests/
+python -m pytest tests/
 ```
 
-## 🔑 Environment Variables
+Test individual components:
+```bash
+# Test history manager
+python -c "from history_manager import HistoryManager; hm = HistoryManager(); print('History system working!')"
 
-Make sure you have a `.env` file in the app directory with:
-```
-GOOGLE_API_KEY=your_google_api_key_here
-FIRECRAWL_API_KEY=your_firecrawl_api_key_here
+# Test agent system
+python tests/test_direct_agent.py
 ```
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **ModuleNotFoundError: No module named 'google.generativeai'**
-   ```bash
-   pip install google-generativeai
-   ```
+**History not saving**
+- Check write permissions in `history/` directory
+- Verify session has at least one complete exchange
+- Check console for error messages
 
-2. **Streamlit not starting**
-   - Check if you're in the correct directory (`app/`)
-   - Ensure all dependencies are installed
-   - Verify your `.env` file exists
+**Sessions not loading**
+- Ensure JSON files are not corrupted
+- Check file permissions in `history/` directory
+- Try refreshing the history list
 
-3. **Agent not responding**
-   - Check your API keys in `.env`
-   - Verify internet connection
-   - Check the console for error messages
+**Search not working**
+- Clear search input and try again
+- Check if session files contain searchable content
+- Verify file structure matches expected format
 
-### Getting Help
+### Debug Mode
+Enable detailed logging:
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG)
+```
 
-- Check the main project README.md for detailed setup instructions
-- Review the test files for working examples
-- Check the console output for detailed error messages
+## 📚 Dependencies
 
-## 📝 Development
+Core requirements in `requirements.txt`:
+- `streamlit` - Web interface framework
+- `google-generativeai` - Google AI integration
+- `firecrawl-py` - Web intelligence
+- `python-dotenv` - Environment management
 
-When making changes:
-1. Test your changes with the appropriate test files
-2. Update this README if you add new features
-3. Ensure all dependencies are listed in `requirements.txt`
-4. Test both Streamlit and command-line interfaces
+## 🤝 Contributing
+
+1. Test new features with existing history system
+2. Ensure backward compatibility with saved sessions
+3. Update documentation for new history features
+4. Add appropriate tests for history functionality
+
+## 📄 License
+
+Same as parent project - MIT License
+
+---
+
+**💡 Tip**: The history system automatically backs up your conversations, so you can experiment freely with AgenticBot knowing your valuable interactions are preserved!
