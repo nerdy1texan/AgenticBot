@@ -263,7 +263,7 @@ with st.sidebar:
         if is_session_modified():
             save_current_session()
         initialize_new_session()
-        st.experimental_rerun()
+        st.rerun()
     
     # Cleanup button (optional)
     if st.button("🧹 Clean Duplicates", key="cleanup", help="Remove duplicate session files"):
@@ -272,7 +272,7 @@ with st.sidebar:
             st.success(f"Cleaned up {deleted_count} duplicate files")
         else:
             st.info("No duplicates found")
-        st.experimental_rerun()
+        st.rerun()
     
     st.markdown('<div class="sidebar-divider"></div>', unsafe_allow_html=True)
     
@@ -301,7 +301,7 @@ with st.sidebar:
         show_all = st.checkbox("Show all sessions", value=st.session_state.show_history)
     with col2:
         if st.button("🔄", help="Refresh history"):
-            st.experimental_rerun()
+            st.rerun()
     
     st.session_state.show_history = show_all
     
@@ -338,7 +338,7 @@ with st.sidebar:
                             
                             if load_session_from_history(session['filepath']):
                                 st.success(f"Loaded: {session['title']}")
-                                st.experimental_rerun()
+                                st.rerun()
                             else:
                                 st.error("Failed to load session")
                     
@@ -349,7 +349,7 @@ with st.sidebar:
                                 if st.session_state.get('current_session_id') == session['session_id']:
                                     initialize_new_session()
                                 st.success("Session deleted")
-                                st.experimental_rerun()
+                                st.rerun()
                             else:
                                 st.error("Failed to delete")
                     
@@ -515,9 +515,28 @@ if user_input:
                 response_text = f"Image generated successfully! Prompt: <b>{prompt}</b>"
                 image_data = result.get("image_data")
                 log_agentic_step('agent_step', "🎉 Root Agent received generated image from Image Generation Agent")
+            elif result["status"] == "partial_success":
+                log_agentic_step('result_processed', "⚠️ Image generation partially completed - text description provided")
+                log_agentic_step('agent_step', "📝 Image Generation Agent created safe description...")
+                response_text = f"<b>Image Generation Request:</b> {prompt}<br><br>"
+                response_text += f"<b>Status:</b> {result.get('message', 'Processing...')}<br><br>"
+                response_text += f"<b>Safe Description Created:</b><br>{result.get('safe_prompt', 'No description available')}<br><br>"
+                response_text += f"<i>Note:</i> {result.get('note', 'Image generation is currently limited.')}"
+                log_agentic_step('agent_step', "🎉 Root Agent received image description from Image Generation Agent")
+            elif result["status"] == "text_response":
+                log_agentic_step('result_processed', "📝 Image generation returned text response instead of image")
+                log_agentic_step('agent_step', "📝 Image Generation Agent provided text response...")
+                response_text = f"<b>Image Generation Request:</b> {prompt}<br><br>"
+                response_text += f"<b>Response:</b><br>{result.get('message', 'No response available')}<br><br>"
+                response_text += f"<i>Note:</i> {result.get('note', 'The model provided a text response instead of generating an image.')}"
+                log_agentic_step('agent_step', "🎉 Root Agent received text response from Image Generation Agent")
             else:
                 log_agentic_step('result_processed', f"❌ Image generation failed: {result.get('error_message', 'Unknown error')}")
-                response_text = f"Image generation failed: {result.get('error_message', 'Unknown error')}"
+                response_text = f"<b>Image Generation Failed</b><br><br>"
+                response_text += f"<b>Prompt:</b> {prompt}<br><br>"
+                response_text += f"<b>Error:</b> {result.get('error_message', 'Unknown error')}<br><br>"
+                if result.get('suggestion'):
+                    response_text += f"<b>Suggestion:</b> {result.get('suggestion')}"
                 
         elif any(word in user_input.lower() for word in ["weather", "current", "latest", "news", "today's", "now"]):
             log_agentic_step('agent_step', f"🎯 Detected current info request, delegating to Search Agent")
@@ -570,7 +589,7 @@ if user_input:
     if len(st.session_state.chat_history) >= 2:  # At least one exchange
         save_current_session()
 
-    st.experimental_rerun()
+    st.rerun()
 
 # --- Footer ---
 st.markdown('<div class="custom-footer">✨ AgenticBot &copy; 2025 &mdash; <a href="https://github.com/nerdy1texan/AgenticBot.git" style="color:#90caf9; text-decoration:none;">GitHub</a> | Built with Google Generative AI, Firecrawl, and Streamlit</div>', unsafe_allow_html=True) 

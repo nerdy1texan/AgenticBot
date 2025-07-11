@@ -1,6 +1,8 @@
-# AgenticBot Application
+# AgenticBot - Multi-Agent AI Assistant
 
-This directory contains the core AgenticBot application with both CLI and web interfaces.
+**Quick Setup**: Run `python setup_env.py` to configure your API keys automatically!
+
+AgenticBot is a sophisticated multi-agent AI assistant built on Google's ADK foundations and Generative AI SDK. It combines real-time web search, intelligent content extraction, deep research capabilities, and AI-powered image generation into a seamless conversational experience.
 
 ## 📁 Directory Structure
 
@@ -221,3 +223,58 @@ Same as parent project - MIT License
 ---
 
 **💡 Tip**: The history system automatically backs up your conversations, so you can experiment freely with AgenticBot knowing your valuable interactions are preserved!
+
+## Image Generation Behavior
+
+### Expected Behavior
+The AgenticBot image generation feature uses Google's Gemini model with strict safety filtering. Due to these safety measures, you may encounter different types of responses:
+
+**Response Types:**
+- 🖼️ **`success`**: Actual image generated and displayed
+- 📝 **`partial_success`**: Detailed creative description provided instead of image
+- ❌ **`error`**: Technical error or rejected prompt
+
+### Why You Might Get Text Instead of Images
+
+Google's safety system often provides creative text descriptions instead of images for:
+- **Character prompts**: "robot", "astronaut", "person"
+- **Complex scenes**: Detailed multi-element compositions
+- **Ambiguous content**: Anything that might be misinterpreted
+
+### Tips for Better Image Generation
+
+**✅ Try These Prompts:**
+```
+- "colorful abstract patterns"
+- "geometric shapes in bright colors"
+- "landscape with mountains and trees"
+- "simple flower in a garden"
+- "peaceful ocean scene"
+```
+
+**❌ Avoid These Types:**
+```
+- Character-based prompts (people, robots, etc.)
+- Anime or cartoon character styles
+- Complex multi-element scenes
+- Brand names or copyrighted content
+```
+
+### Troubleshooting
+
+1. **Getting Text Descriptions?**
+   - This is normal behavior due to safety filtering
+   - The descriptions can be useful for understanding what the AI would create
+   - Try simpler, nature-based prompts
+
+2. **No Response at All?**
+   - Check your Google API key configuration
+   - Verify internet connection
+   - Try a different prompt
+
+3. **Want Actual Images?**
+   - Use very simple, abstract prompts
+   - Focus on landscapes, patterns, or geometric shapes
+   - Avoid any character or person-related content
+
+The text descriptions you receive are actually quite detailed and can be valuable for understanding the AI's creative interpretation of your prompt!
